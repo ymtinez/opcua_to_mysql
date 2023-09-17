@@ -23,7 +23,7 @@ class MySQL:
         Returns:
             str: SQL Command to create the respective table
         """
-        table_id = f"{db_name.lower()}_ID"
+        table_id = f"{db_name.lower()}_id"
         variables_and_type_string = ""
         for key, value in var_types.items():
             variables_and_type_string += f", {key} {value} NOT NULL"
@@ -59,7 +59,7 @@ class MySQL:
         for key in variables.keys():
             variables_names += f"{key}, "
         variables_names += "created"
-        amount_of_variables = ("%s, " * (len(variables) + 1))[:-1]
+        amount_of_variables = ("%s, " * (len(variables) + 1))[:-2]
         return f"INSERT INTO {db_name} ({variables_names}) VALUES({amount_of_variables})"
 
     def insert_into_table(self, db_name: str, variables: dict) -> bool:
