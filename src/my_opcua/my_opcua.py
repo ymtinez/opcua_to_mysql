@@ -21,10 +21,10 @@ class MyOPCUA:
         client_node_value = client_node.get_value()
         if isinstance(client_node_value, float):
             return "Real"
+        elif isinstance(client_node_value, bool):
+            return "Boolean"
         elif isinstance(client_node_value, int):
             return "Int"
-        elif isinstance(client_node_value, float):
-            return "Boolean"
         else:
             return ""
 
