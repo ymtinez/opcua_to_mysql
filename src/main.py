@@ -16,7 +16,7 @@ try:
     my_opcua.client.connect()
     # print(f"Connected with the OPCUA-Server:")
     print(f"Connected with the OPCUA-Server: {URL}")
-    print("List of values in the OPCUA-Server:")
+    print(f"Listing OPCUA-Server {URL}:")
     # print all databases un the server
     databases_list = my_opcua.list_all_databases()
     for database in databases_list:
@@ -40,6 +40,7 @@ try:
         print("Connected with MySQL Server")
         # creating table
         db_var_types = my_opcua.get_db_variables_type(specific_db_node_id)
+        print(db_var_types)
         if my_mysql.create_table(specific_db_name, db_var_types):
             print("Table created successfully")
             while True:
