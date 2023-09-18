@@ -1,15 +1,27 @@
 version: '3'
 services:
   opcua:
+    # Service Name: MySQL Database Server
     image: mysql
     environment:
+      # MySQL root user password (configurable)
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      # MySQL Database Name (configurable)
       MYSQL_DATABASE: ${MYSQL_DATABASE}
+      # MySQL User Name (configurable)
       MYSQL_USER: ${MYSQL_USER}
+      # MySQL User Password (configurable)
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
+      # Volume to store MySQL data
       - mysql_volume:/var/lib/mysql
 volumes:
   mysql_volume:
+    # Persistent volume for MySQL database data
+
+
+# To execute the server: docker compose up
+# To stop the server: docker compose down
+# To stop the server and delete the persistent volume: docker compose down -v
