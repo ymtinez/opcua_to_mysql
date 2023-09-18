@@ -73,7 +73,7 @@ class MySQL:
             # }
         """
         dict_temp = {}
-        for key, value in variables.item():
+        for key, value in variables.items():
             value_type = ""
             if isinstance(value, float):
                 value_type = "Real"
@@ -117,7 +117,7 @@ class MySQL:
         variables_and_type_string = ""
         for key, value in var_types.items():
             variables_and_type_string += f", {key} {value} NOT NULL"
-        return f"CREATE TABLE IF NOT EXISTS {db_name} ({table_id} int PRIMARY KEY AUTO_INCREMENT {variables_and_type_string}, created TIMESTAMP NOT NULL)"
+        return f"CREATE TABLE IF NOT EXISTS {db_name} ({table_id} int PRIMARY KEY AUTO_INCREMENT{variables_and_type_string}, created TIMESTAMP NOT NULL)"
 
     def create_table(self, db_name: str, variables: dict) -> bool:
         """
@@ -183,8 +183,8 @@ class MySQL:
             # "INSERT INTO employees (first_name, last_name, age, height, is_manager, created)
             # VALUES (%s, %s, %s, %s, %s, %s)"
         """
-        variables_names = ", ".join(variables.keys())
-        amount_of_variables = ("%s, " * len(variables))[:-2]
+        variables_names = ", ".join(variables.keys()) + ", created"
+        amount_of_variables = ("%s, " * (len(variables) + 1))[:-2]
         return f"INSERT INTO {db_name} ({variables_names}) VALUES({amount_of_variables})"
 
     def insert_into_table(self, db_name: str, variables: dict) -> bool:
@@ -215,7 +215,8 @@ class MySQL:
         """
         try:
             sql = self.get_insert_into_cmd(db_name, variables)
-            values_insert = list(variables.values()).append(str(datetime.now()))
+            values_insert = list(variables.values())
+            values_insert.append(str(datetime.now()))
             self.mycursor.execute(sql, tuple(values_insert))
             self.my_db.commit()
             return True
