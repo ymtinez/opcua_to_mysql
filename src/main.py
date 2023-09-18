@@ -38,10 +38,9 @@ try:
             database_name=os.getenv("MYSQL_DATABASE"),
         )
         print("Connected with MySQL Server")
-        # creating table
-        db_var_types = my_opcua.get_db_variables_type(specific_db_node_id)
-        print(db_var_types)
-        if my_mysql.create_table(specific_db_name, db_var_types):
+        # creating the dict with all values from the specific database
+        db_variables = my_opcua.get_all_db_values(specific_db_node_id)
+        if my_mysql.create_table(specific_db_name, db_variables):
             print("Table created successfully")
             while True:
                 # creating the dict with all values from the specific database
