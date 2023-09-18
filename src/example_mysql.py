@@ -14,15 +14,8 @@ my_mysql = MySQL(
 
 variables = {"temp": 236.8, "visc": 13.7, "system_Start": True, "hours": 10}
 
-variables_types = {
-    "temp": "Real",
-    "visc": "Real",
-    "system_Start": "Boolean",
-    "hours": "Int",
-}
-
-# print(my_mysql.get_create_table_cmd("HTU", variables_types))
-if my_mysql.create_table("HTU", variables_types):
+# print(my_mysql.get_create_table_cmd("HTU", variables))
+if my_mysql.create_table("HTU", variables):
     print("Table created successfully")
 else:
     print("Error")
