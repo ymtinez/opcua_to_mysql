@@ -4,11 +4,36 @@ from datetime import datetime
 
 
 class MySQL:
-    """Class to connect with the MySQL Server and generate command bases on specific databases"""
+    """
+    A class for interacting with a MySQL database.
+
+    Args:
+        host_name (str): The hostname or IP address of the MySQL server.
+        user_name (str): The MySQL user name for authentication.
+        user_password (str): The password associated with the MySQL user.
+        database_name (str): The name of the MySQL database to connect to.
+
+    Example:
+        mysql_connection = MySQL(
+            host_name="localhost",
+            user_name="myuser",
+            user_password="mypassword",
+            database_name="mydatabase"
+        )
+    """
 
     def __init__(
         self, host_name: str, user_name: str, user_password: str, database_name: str
     ) -> None:
+        """
+        Initialize a new instance of MySQL.
+
+        Args:
+            host_name (str): The hostname or IP address of the MySQL server.
+            user_name (str): The MySQL user name for authentication.
+            user_password (str): The password associated with the MySQL user.
+            database_name (str): The name of the MySQL database to connect to.
+        """
         self.my_db = mysql.connector.connect(
             host=host_name, user=user_name, passwd=user_password, database=database_name
         )
