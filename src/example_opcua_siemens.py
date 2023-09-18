@@ -20,10 +20,6 @@ try:
     if specific_db_node_id == "":
         print(f"Error reading database {specific_db_name}")
     else:
-        db_var_types = my_opcua.get_db_variables_type(specific_db_node_id)
-        print(f"{specific_db_name} variables types:")
-        for key, value in db_var_types.items():
-            print(f" -> {key}: {value}")
         db_variables = my_opcua.get_all_db_values(specific_db_node_id)
         print(f"{specific_db_name} variables:")
         for key, value in db_variables.items():
