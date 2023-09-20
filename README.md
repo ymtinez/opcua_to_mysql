@@ -32,7 +32,7 @@ The project is organized as follows:
 Before getting started, make sure you have the following dependencies installed:
 
 #### Python 3.x
-- [OPC UA Library]([link-to-opc-ua-library](https://github.com/FreeOpcUa/python-opcua))
+- [OPC UA Library]([link-to-opc-ua-library](https://github.com/FreeOpcUa/opcua-asyncio))
 - [MySQL Connector]([link-to-mysql-connector](https://github.com/mysql/mysql-connector-python))
 - [Docker (for server setup)](https://www.docker.com/) or [MySQL Server](https://www.mysql.com/)
 
@@ -61,13 +61,18 @@ Customize the project's behavior by modifying the src/.env file and server/.env 
 1. Start the required servers using Docker Compose:
     ```bash
     cd server
-    docker-compose up -d
+    docker compose up
 
-2. Run the project:
+2. Stop the required servers using Docker Compose:
+    ```bash
+    cd server
+    docker compose down
+
+3. Run the project:
     ```bash
     python src/main.py
 
-3. The program will establish a connection to the OPC UA server, retrieve data, and store it in the MySQL database.
+4. The program will establish a connection to the OPC UA server, retrieve data, and store it in the MySQL database.
 
 ## Contributing
 We welcome contributions from the community! If you'd like to improve this project.
