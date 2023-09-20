@@ -32,8 +32,8 @@ The project is organized as follows:
 Before getting started, make sure you have the following dependencies installed:
 
 #### Python 3.x
-- [OPC UA Library]([link-to-opc-ua-library](https://github.com/FreeOpcUa/opcua-asyncio))
-- [MySQL Connector]([link-to-mysql-connector](https://github.com/mysql/mysql-connector-python))
+- [OPC UA Library](https://github.com/FreeOpcUa/opcua-asyncio)
+- [MySQL Connector](https://github.com/mysql/mysql-connector-python)
 - [Docker (for server setup)](https://www.docker.com/) or [MySQL Server](https://www.mysql.com/)
 
 ## Installation
