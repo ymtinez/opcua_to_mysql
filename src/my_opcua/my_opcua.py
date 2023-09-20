@@ -77,7 +77,7 @@ class MyOPCUA:
             values are the corresponding input values.
 
         Example:
-            node_id_name = "pressure"
+            node_id = "ns=3;s="Data_DB"."pressure""
             input_values = await get_input_value(node_id)
             # Output (if node value is [1.23, 4.56, 7.89]):
             # {
@@ -139,15 +139,15 @@ class MyOPCUA:
         Get all input values from variables within a specific database node and return them as a dictionary.
 
         Args:
-            db_node_id (str): The Node ID of the specific database node.
+            db_name (str): The name of the database node to retrieve.
 
         Returns:
             dict: A dictionary containing all input values from variables within the database node,
             where keys are variable names and values are the corresponding input values.
 
         Example:
-            db_node_id = "ns=3;s=MyDatabase"
-            values_dict = await get_values_from_db(db_node_id)
+            db_name = "MyDatabase"
+            values_dict = await get_values_from_db_name(db_name)
             # Output (if variables in the database have input values):
             # {
             #   "Variable1": 123,
@@ -180,7 +180,7 @@ class MyOPCUA:
 
         Example:
             db_node_id = "ns=3;s=MyDatabase"
-            values_dict = await get_values_from_db(db_node_id)
+            values_dict = await get_values_from_db_node_id(db_node_id)
             # Output (if variables in the database have input values):
             # {
             #   "Variable1": 123,
@@ -199,20 +199,29 @@ class MyOPCUA:
                 var_dict.update(await self.get_input_value(variable))
         return var_dict
 
-    async def get_list_of_databases(self) -> list[str]:
+    async def get_list_of_databases(
+        self, folder_data_blocks_global_node_id: str = "ns=3;s=DataBlocksGlobal"
+    ) -> list[str]:
         """
         List all database names available within the global data blocks.
 
+        Args:
+            folder_data_blocks_global_node_id (str): The NodeID of the folder containing databases.
+                Defaults to "ns=3;s=DataBlocksGlobal".
+
         Returns:
-            list[str]: A list of database names.
+            list[str]: A list of database names found on DataBlocksGlobal.
+
+        Raises:
+            Any exceptions that may occur during the retrieval of the database list.
 
         Example:
-            databases = await get_list_of_databases()
-            # Output:
-            # ['Database1', 'Database2', 'Database3']
+            databases = await my_opcua.get_list_of_databases()
+            for database in databases:
+                print(f"Database: {database}")
         """
         dbs_list = []
-        data_block_global = self.client.get_node("ns=3;s=DataBlocksGlobal")
+        data_block_global = self.client.get_node(folder_data_blocks_global_node_id)
         databases = await data_block_global.get_children()
         for database in databases:
             if (
