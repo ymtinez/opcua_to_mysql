@@ -207,10 +207,10 @@ class MyOPCUA:
 
         Args:
             folder_data_blocks_global_node_id (str): The NodeID of the folder containing databases.
-                Defaults to "ns=3;s=DataBlocksGlobal".
+                Defaults to "ns=3;s=DataBlocksGlobal" for SIEMENS OPC/UA-Server.
 
         Returns:
-            list[str]: A list of database names found on DataBlocksGlobal.
+            list[str]: A list of database names found on "folder_data_blocks_global_node_id".
 
         Raises:
             Any exceptions that may occur during the retrieval of the database list.
